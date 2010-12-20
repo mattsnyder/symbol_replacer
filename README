@@ -43,4 +43,8 @@ Patrick Welsh's challenge rules are fairly simple:
 
 I could not find any tests for Uncle Bob's code, so I have written specs for the ruby version of the class to verify the rubification was succesful. 
 
-Good luck!!
+Also of note, the Java version uses getSymbol which is part of the Java language. The rubified version leverages eval and looks for references to global variables and replaces them with their value. Yes, I know, globals are bad, but this is an exercise in refactoring. 
+
+I hope you find this valuable! Happy refactoring!
+
+Thanks to Patrick Welsh for inspiring this work with your post and to Uncle Bob for your SymbolReplacer example.
