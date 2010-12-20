@@ -1,0 +1,46 @@
+Inspired by Patrick Welsh's recent post on Agile Programming (http://http://patrickwilsonwelsh.com/?p=455), I've decided to work on Rubifying the lessons and examples he refers to in his post.
+
+This is the first of those, SymbolReplacer by Uncle Bob.
+
+
+This is the original class Uncle Bob started out with written in Java (http://http://blog.objectmentor.com/articles/2009/09/11/one-thing-extract-till-you-drop). 
+
+class SymbolReplacer {
+    protected String stringToReplace;
+    protected List<String> alreadyReplaced = new ArrayList<String>();
+
+    SymbolReplacer(String s) {
+      this.stringToReplace = s;
+    }
+
+    String replace() {
+      Pattern symbolPattern = Pattern.compile("\\$([a-zA-Z]\\w*)");
+      Matcher symbolMatcher = symbolPattern.matcher(stringToReplace);
+      while (symbolMatcher.find()) {
+        String symbolName = symbolMatcher.group(1);
+        if (getSymbol(symbolName) != null && !alreadyReplaced.contains(symbolName)) {
+          alreadyReplaced.add(symbolName);
+          stringToReplace = stringToReplace.replace("$" + symbolName, translate(symbolName));
+        }
+      }
+      return stringToReplace;
+    }
+
+    protected String translate(String symbolName) {
+      return getSymbol(symbolName);
+    }
+  }
+
+This repo contains the Ruby equivalent. I invite you to do some hardcore forking and fork this repo, accept Patrick's challenge, and practice refactoring to a clean method hierarchy.
+
+Patrick Welsh's challenge rules are fairly simple:
+
+- Keep all existing tests, such as they are, running green as much as possible. Also try to purposefully break them sometimes, to see what kinds of coverage they give you in the code (more on that later, too).
+
+- Rename each entity (project, package, class, method, variable) at least twice, as you learn more and more about what it should be doing
+
+- By the time you are done, no method should contain no more than 8 lines of code (this also applies to test methods), and most methods should be in the neighborhood of 3 or 4 lines of code, including declarations and return statements.
+
+I could not find any tests for Uncle Bob's code, so I have written specs for the ruby version of the class to verify the rubification was succesful. 
+
+Good luck!!
